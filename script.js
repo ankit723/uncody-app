@@ -29,7 +29,7 @@ textSelectionToolbar.className = 'text-selection-toolbar';
 textSelectionToolbar.style.display = 'none';
 document.body.appendChild(textSelectionToolbar);
 
-document.addEventListener('mouseup', function(event) {
+document.addEventListener('mouseup', function() {
   const selection = window.getSelection().toString();
   if (selection.length > 0) {
     const range = window.getSelection().getRangeAt(0).getBoundingClientRect();
@@ -37,7 +37,7 @@ document.addEventListener('mouseup', function(event) {
     const toolbarHeight = textSelectionToolbar.offsetHeight;
     const toolbarTop = range.top - toolbarHeight - 5;
     const toolbarLeft = range.left + (range.width / 2) - (toolbarWidth / 2);
-    textSelectionToolbar.style.display = 'block';
+    textSelectionToolbar.style.display = 'flex';
     textSelectionToolbar.style.top = toolbarTop + 'px';
     textSelectionToolbar.style.left = toolbarLeft + 'px';
   } else {
@@ -51,7 +51,12 @@ boldButton.textContent = 'B';
 boldButton.onclick = function() {
   selectHTML();
   document.querySelectorAll('span').forEach(function (span) {
-    span.style.fontWeight = 'Bolder';
+    if(span.style.fontWeight !='bolder'){
+      span.style.fontWeight="bolder"
+    }
+    else{
+      span.style.fontWeight=500
+    }
 });
 };
 
@@ -61,7 +66,12 @@ italicButton.textContent = 'I';
 italicButton.onclick = function() {
   selectHTML();
   document.querySelectorAll('span').forEach(function (span) {
-    span.style.fontStyle = 'italic';
+    if(span.style.fontStyle !='italic'){
+      span.style.fontStyle="italic"
+    }
+    else{
+      span.style.fontStyle='normal'
+    }
   });
 };
 
@@ -72,19 +82,25 @@ underlineButton.textContent = 'U';
 underlineButton.onclick = function() {
   selectHTML();
   document.querySelectorAll('span').forEach(function (span) {
-    span.style.textDecoration='underline'
+    if(span.style.textDecoration !='underline'){
+      span.style.textDecoration="underline"
+    }
+    else{
+      span.style.textDecoration='none'
+    }
   });
 };
 
+
+
+
 // Button to Re-Write the Selected Text
-const textEditable = document.createElement('button');
-textEditable.textContent = 'T';
-textEditable.onclick = function() {
-  selectHTML();
-  document.querySelectorAll('span').forEach(function (span) {
-    span.contentEditable=true
-  });
-};
+selectHTML();
+document.querySelectorAll('span').forEach(function (span) {
+  span.contentEditable=true
+});
+
+
 
 // Button to Re-Size the Selected Text
 const sizeEditable = document.createElement('button');
@@ -119,7 +135,7 @@ colorEditable.onclick = function() {
 textSelectionToolbar.appendChild(boldButton);
 textSelectionToolbar.appendChild(italicButton);
 textSelectionToolbar.appendChild(underlineButton);
-textSelectionToolbar.appendChild(textEditable);
+// textSelectionToolbar.appendChild(textEditable);
 textSelectionToolbar.appendChild(sizeEditable);
 textSelectionToolbar.appendChild(colorEditable);
 
