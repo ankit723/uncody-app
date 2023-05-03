@@ -106,7 +106,6 @@ colorEditable.onclick = function() {
   selectHTML();
   document.querySelectorAll('span').forEach(function (span) {
     const colorPicker = document.getElementById("color-picker");
-    colorPicker.style.display='block'
     const new_color = colorPicker.value;
     span.style.color=new_color
 
